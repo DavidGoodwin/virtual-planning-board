@@ -1,0 +1,30 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="report">
+    <h1>To Do</h1>
+    <h3>Select Project:</h3>
+    
+{% ifequal project_count 0 %}
+    <p>No projects found</p>
+{% else %}
+    <form method="post" action="action/">
+        <select name="project_name">
+    {% for project_name in projects %}
+            <option value="{{ project_name }}">{{ project_name }}</option>
+    {% endfor %}
+        </select><br />
+        <input type="submit" name="new_ticket" value="New Ticket" />
+        <input type="submit" name="view_tickets" value="View Tickets" />
+    </form>
+{% endifequal%}
+
+</div>
+{% endblock %}

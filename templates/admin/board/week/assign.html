@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}admin/css/week-display.css" />
+<link rel="stylesheet" type="text/css" href="{{ ADMIN_MEDIA_PREFIX }}css/forms.css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../../">Home</a> &rsaquo;
+     <a href="../../../">Board</a> &rsaquo;
+     <a href="../../">Weeks</a> &rsaquo;
+     <a href="../view/">{{ week }}</a> &rsaquo;
+     Assign
+</div>
+{% endblock %}
+
+{% block content %}
+
+<form enctype="multipart/form-data" action="" method="post">
+    <div>
+        <fieldset class="module aligned">
+            {% for field in form %}
+            <div class="form-row">
+            <div>
+                {{ field.errors }}
+                {{ field.label_tag }}{{ field }}
+            </div>
+            </div>
+            {% endfor %}
+        </fieldset>
+    </div>
+    <div class="submit-row">
+        <input value="Save" class="default" name="_save" type="submit">
+    </div>
+</form>
+
+{% endblock %}

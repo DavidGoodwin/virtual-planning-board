@@ -1,0 +1,22 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="project_list">
+    <h1>Select Project:</h1>
+    <ul>
+    {% if allow_all_projects %}
+        <li class="project_link"><a href="all/">All Projects</a></li>
+    {% endif %}
+    {% for project in projects %}
+        <li class="project_link"><a href="{{ project }}/">{{ project }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

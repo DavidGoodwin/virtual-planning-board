@@ -1,0 +1,69 @@
+<div id="filter">
+    <form id="filter_form" name="filter_form" method="post" action="">
+        <table class="filter">
+            <tr>
+                <th>Filter Results By:</th>
+                <td>
+                    <select name="filter_by">
+                        <option label="ID" value="trac_ticket_id"{% ifequal filter_data.filter_by 'trac_ticket_id' %} selected="selected"{% endifequal %}>ID</option>
+                        <option label="Title" value="title"{% ifequal filter_data.filter_by 'title' %} selected="selected"{% endifequal %}>Title</option>
+                        <option label="Description" value="description"{% ifequal filter_data.filter_by 'description' %} selected="selected"{% endifequal %}>Description</option>
+                        <option label="Status" value="status"{% ifequal filter_data.filter_by 'status' %} selected="selected"{% endifequal %}>Status</option>
+                    </select>
+                    is
+                </td>
+                <td>
+                    <select name="filter_criteria">
+                        <option label="Contains" value="contains"{% ifequal filter_data.filter_criteria 'contains' %} selected="selected"{% endifequal %}>Contains</option>
+                        <option label="Equal to" value="equal"{% ifequal filter_data.filter_criteria 'equal' %} selected="selected"{% endifequal %}>Equal to</option>
+                        <option label="Not Equal To" value="not_equal"{% ifequal filter_data.filter_criteria 'not_equal' %} selected="selected"{% endifequal %}>Not Equal To</option>
+                        <option label="Greater Than or Equal to" value="greater_equal"{% ifequal filter_data.filter_criteria 'greater_equal' %} selected="selected"{% endifequal %}>Greater Than or Equal to</option>
+                        <option label="Greater Than" value="greater"{% ifequal filter_data.filter_criteria 'greater' %} selected="selected"{% endifequal %}>Greater Than</option>
+                        <option label="Less Than" value="less"{% ifequal filter_data.filter_criteria 'less' %} selected="selected"{% endifequal %}>Less Than</option>
+                        <option label="Less Than or Equal to" value="less_equal"{% ifequal filter_data.filter_criteria 'less_equal' %} selected="selected"{% endifequal %}>Less Than or Equal to</option>
+                        <option label="Null / Empty / Unassigned" value="is_null"{% ifequal filter_data.filter_criteria 'is_null' %} selected="selected"{% endifequal %}>Null / Empty / Unassigned</option>
+                    </select>
+                </td>
+                <td>
+                    <input name="filter_text" type="text" size="30" value="{{ filter_data.filter_text }}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Order Results By:</th>
+                <td>
+                    <select name="order_by_1">
+                        <option label="ID" value="trac_ticket_id"{% ifequal filter_data.order_by_1 'trac_ticket_id' %} selected="selected"{% endifequal %}>ID</option>
+                        <option label="Title" value="title"{% ifequal filter_data.order_by_1 'title' %} selected="selected"{% endifequal %}>Title</option>
+                        <option label="Description" value="description"{% ifequal filter_data.order_by_1 'description' %} selected="selected"{% endifequal %}>Description</option>
+                        <option label="Status" value="status"{% ifequal filter_data.order_by_1 'status' %} selected="selected"{% endifequal %}>Status</option>
+                        <option label="Creation Date" value="creation_date"{% ifequal filter_data.order_by_1 'creation_date' %} selected="selected"{% endifequal %}>Creation Date</option>
+                    </select>
+                    then
+                </td>
+                <td>
+                    <select name="order_by_2">
+                        <option label="ID" value="trac_ticket_id"{% ifequal filter_data.order_by_2 'trac_ticket_id' %} selected="selected"{% endifequal %}>ID</option>
+                        <option label="Title" value="title"{% ifequal filter_data.order_by_2 'title' %} selected="selected"{% endifequal %}>Title</option>
+                        <option label="Description" value="description"{% ifequal filter_data.order_by_2 'description' %} selected="selected"{% endifequal %}>Description</option>
+                        <option label="Status" value="status"{% ifequal filter_data.order_by_2 'status' %} selected="selected"{% endifequal %}>Status</option>
+                        <option label="Creation Date" value="creation_date"{% ifequal filter_data.order_by_2 'creation_date' %} selected="selected"{% endifequal %}>Creation Date</option>
+                    </select>
+                </td>
+                <td>
+                    <label>
+                        <input type="radio" name="order" value="ascending" {% ifnotequal filter_data.order 'descending' %}checked="checked"{% endifnotequal %}/> Ascending
+                    </label>
+                    <label>
+                        <input type="radio" name="order" value="descending" {% ifequal filter_data.order 'descending' %}checked="checked"{% endifequal %}/> Descending
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right">
+                    <input name="submit" type="submit" id="submit" value="Apply Filter / Order" />&nbsp;
+                    <a href=''><button>Remove Filter / Order</button></a>
+                </td> 
+            </tr>
+        </table> 
+    </form>
+</div>

@@ -1,0 +1,35 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="report">
+    <h1>To Do List For: "{{ project_name }}"</h1>
+    {% include "reporting/filter.html" %}
+    
+{% ifequal ticket_count 0 %}
+    <p>No tickets found</p>
+{% else %}
+    <table>
+        <tr>
+            <th>ID:</th>
+            <th>Ticket:</th>
+            <th>Estimated Time Remaining:</th>
+        </tr>
+        
+    {% for ticket in tickets %}
+        <tr>
+            <td><a href="{{ path_to_trac }}{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }}</a></td>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.getTimeDifference }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endifequal %}
+</div>
+{% endblock %}

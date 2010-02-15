@@ -1,0 +1,185 @@
+{% extends "board/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}board/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ MEDIA_URL }}board/javascript/mootools.v1.11.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}board/javascript/board.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}board/javascript/pp_dropmenu.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var MEDIA_URL = "{{ MEDIA_URL }}"
+    var BASE_URL = "{% url planner.board.views.index.index %}"
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="header">
+<div id="project_colours">
+{% for project in projects %}
+    <div class="proj_col" id="proj_col_{{ project.id }}">
+    <span class="colour" style="background-color: #{{ project.colour }}"></span> 
+        <a href="{{ admin_url }}/board/project/{{ project.id }}">{{ project.name|slice:":17" }}</a>
+    </div>
+{% endfor %}
+</div>
+  <div id="top-menu">
+    <a id="home-link" href="{% url planner.board.views.index.index %}">Home</a>
+    <ul class="pp_dropmenu">
+    <li>Weeks</li>
+        <ul>
+            <li><a href="{% url planner.board.views.index.weeks 0 %}">Current Month Only</a></li>
+            <li><a href="{% url planner.board.views.index.weeks 2 %}">2 Weeks</a></li>
+            <li><a href="{% url planner.board.views.index.weeks 4 %}">4 Weeks</a></li>
+            <li><a href="{% url planner.board.views.index.weeks 6 %}">6 Weeks</a></li>
+        </ul>
+    </ul>
+    <ul class="pp_dropmenu">
+    <li>Person</li>
+        <ul>
+            <li><a href="{% url planner.board.views.index.person 0 %}">All</a></li>
+            {% for person in people %}
+                <li><a href="{% url planner.board.views.index.person person.id %}">{{ person.username }}</a></li>
+            {% endfor %}
+        </ul>
+    </ul>
+    
+    <a href="#" id="save-link">Save</a>
+    </div>
+<div id="legend-link-holder">
+    <div id="legend">
+        <img style="border:0px;" src="{{ MEDIA_URL }}board/images/bullet_arrow_down.png"/>
+    </div>
+</div>
+
+</div>
+<div style="height:31px;">
+<!-- spacer -->
+</div>
+
+{% if homeless %}
+<div>
+<div class="start-date" id="sd-homeless"><span style="padding: 5px;">Ongoing</span></div>
+<div class="week" id="week-homeless">
+    {% for ticket in homeless %}
+        <div class="dropper" id="dropper-{{ forloop.counter }}">
+        <div id="ticket-{{ ticket.id }}" class="ticket {% ifequal ticket.assigned_person_id person_id %}ticket-mine{% else %}ticket-not-mine{% endifequal %}">
+            <div class="dragme"></div>
+            <div class="ticket-title" title="{{ ticket.title }} e:{{ ticket.estimated_time }} a:{{ ticket.actual_time }}" style="background-color: #{{ ticket.project.colour }};">
+                {{ ticket.title|slice:":19" }}
+            </div>
+            <div class="ticket-id {% ifequal ticket.assigned_person_id person_id %}ticket-id-mine{% endifequal %}">
+                <span style="float: left; color: #333; {% ifequal ticket.assigned_person_id person_id %}margin-left: 17px;{% else %}margin-left: 3px;{% endifequal %}">
+                {{ ticket.assigned_person }}{% if ticket.accepted %}*{% endif %}</span>
+                <span>#{{ ticket.trac_ticket_id }}</span>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+<div style="clear: both; margin: 0;"></div>
+</div>
+{% endif %}
+
+{% for week in weeks %}
+<div class="start-date" id="sd-{{ week.start_date }}">
+    <span style="padding: 5px;">{{ week.start_date }}</span>
+    <span id="sd-{{ week.start_date }}-week-avail-hours" class="start-date-week-info">Total Hours Available: <span>{{ week.getTotalAvailableHours }}</span>hrs</span>
+    <span id="sd-{{ week.start_date }}-avail-hours-remain" class="start-date-week-info">
+        Hours Remaining in Week ({% if week.isCurrentWeek %}{{ week_range }}{% else %}Mon-Fri{% endif %}): 
+        <span>{{ week.getAvailableHours }}</span>hrs 
+    </span>
+    <span id="sd-{{ week.start_date }}-total-est-ticket-times" class="start-date-week-info">Estimated Time: <span>{{ week.getTotalEstimatedTicketTimes }}</span>hrs</span>
+    <span id="sd-{{ week.start_date }}-total-hours-spent" class="start-date-week-info">Total Hours Spent: <span>{{ week.getTotalHoursSpent }}</span>hrs</span>
+    <span id="sd-{{ week.start_date }}-remain-work-hours" class="start-date-week-info">Remaining Work: 
+        <span>{{ week.getRemainingWorkHours }}</span>hrs
+    </span>
+    <span id="sd-{{ week.start_date }}-unassigned-hours" class="start-date-week-info">Unassigned: 
+        <span>{{ week.getUnassignedHours }}</span>hrs
+    </span>
+</div>
+<div class="week" id="week-{{ week.start_date }}">
+    {% if week.hasUnFixedTickets %}
+        {% for ticket in week.getUnFixedTickets %}
+                <div class="dropper" id="dropper-{{ forloop.counter }}">
+                    <div id="ticket-{{ ticket.id }}" class="ticket {% ifequal ticket.assigned_person_id person_id %}ticket-mine{% else %}ticket-not-mine{% endifequal  %}">
+                        <div class="dragme"></div>
+                        <div class="ticket-title" title="{{ ticket.title }} e:{{ ticket.estimated_time }} a:{{ ticket.actual_time }}" style="background-color: #{{ ticket.project.colour }};">
+                            {{ ticket.title|slice:":19" }}
+                        </div>
+                        <div class="ticket-id {% ifequal ticket.assigned_person_id person_id %}ticket-id-mine{% endifequal %}">
+                            <span style="float: left; color: #333; {% ifequal ticket.assigned_person_id person_id %}margin-left: 17px;{% else %}margin-left: 3px;{% endifequal %}">{{ ticket.assigned_person }}{% if ticket.accepted %}*{% endif %}</span>
+                            #{{ ticket.trac_ticket_id }}
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    {% else %}
+            <div class="dropper" id="dropper-{{ forloop.counter }}">
+            </div>
+    {% endif %}
+</div>
+<div style="clear: both; margin: 0; height: 5px;"></div>
+{% endfor %}
+
+<div id="info">
+Info:
+<ul>
+<li>Keyboard Shortcuts: <strong>T</strong> to Toggle Ticket Bar, <strong>L</strong> to Toggle Legend, <strong>Enter</strong> to Search when ticket bar is open, <strong>Escape</strong> to Close ticket information</li>
+<li>Dropping a ticket over another ticket causes all the neighbouring tickets of the target to be shifted right and the dragged ticket to be inserted in its place.</li>
+<li>Dropping a ticket over a weeks date appends it to the end of that week (only if the target week is different to that of the tickets)</li>
+<li>Double click a ticket to view its information</li>
+<li>Ticket Ordering is not saved until Save in the top bar is clicked</li>
+<li>Saving, updates all the tickets in the weeks that have been modified since last save</li>
+<li>Searching can only be performed after a save (if tickets have been manipulated since last save)</li>
+<li>If the browser window is resized after a ticket has been moved from unassigned tickets onto the board, all changes are saved.</li>
+<li>JS Library: MooTools</li>
+</ul>
+</div>
+
+
+</div>
+<div id="lower" style="height: 18px;"> 
+    <div id="minim">
+        <span id="lock_open" style="float: right; padding-right: 2px;">
+        <img src="{{ MEDIA_URL }}board/images/unlock.gif"/>
+        </span>
+        <span id="lock" style="float: right; padding-right: 2px;">
+        <img src="{{ MEDIA_URL }}board/images/lock.gif"/>
+        </span>
+        <span style="float: left; margin-left: -180px;"><span id="current-person">{{ username }}</span></span>
+        <span style="float: right; padding-right: 10px; color:#A67DCF;"><a href="http://virtual-planner.palepurple.co.uk">Virtual Planner Trac</a> - <a href="http://www.palepurple.co.uk">Pale Purple</a></span>
+        <div id="hide-link" style="cursor: pointer;">show</div>
+        <div id="error"></div>
+    </div>
+    <div id="search" style="display: none;">
+        
+        <span id="left-arrow">&lt;</span>
+        <span id="right-arrow">&gt;</span>
+        <table>
+            <tr>
+                <th>Page:</th>
+                <td id="page-display"><span id="page">1</span> of <span id="total_pages">0</span></td>
+                <th>Project:</th>
+                <td>
+                    <select id="s_project_id" name="project_id">
+                        <option></option>
+                        {% for project in projects %}
+                            <option label="{{ project.name }}" value="{{ project.id }}">{{ project.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <th>Title:</th>
+                <td><input type="text" id="s_ticket_title" size="20"/></td>
+                <th>Trac Id:</th>
+                <td><input type="text" id="s_trac_id" size="2"/></td>
+                <th></th>
+                <td><input type="button" value="Search" id="search-button"/></td>
+                <td><input type="button" value="Clear" id="clear-search"/></td>
+            </tr>
+        </table>
+    </div>
+    <div id="gallery" style="display: none;">
+    </div>
+</div>
+{% endblock %}

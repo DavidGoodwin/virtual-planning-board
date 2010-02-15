@@ -1,0 +1,23 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="developer_list">
+    <h1>Select Developer:</h1>
+{% ifequal developer_count 0 %}
+    <p>No developers found</p>
+{% else %}
+    <ul>
+    {% for developer in developers %}
+        <li class="developer_link"><a href="{{ developer }}/">{{ developer }}</a></li>
+    {% endfor %}
+    </ul>
+{% endifequal %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="hours_report">
+    <h1>Hours For "{{ developer }}" - Total Hours: {{ total_hours }}</h1>
+    <h2>Tickets For "{{ project_name }}"</h2>
+    
+    <table>
+        <tr>
+            <th>Ticket:</th>
+            <th>Ticket Summary:</th>
+            <th>Date:</th>
+            <th>Time Spent:</th>
+        </tr>
+    {% for change in changes %}
+        <tr>
+            <td class="id"><a href="{{ path_to_trac }}{{ project_name }}/ticket/{{ change.ticket.trac_ticket_id }}">#{{ change.ticket.trac_ticket_id }}</a></td>
+            <td class="summary">{{ change.ticket.title }}</td>
+            <td class="date">{{ change.change_datetime|date:"Y-m-d" }}</td>
+            <td class="actual_time">{{ change.hours }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

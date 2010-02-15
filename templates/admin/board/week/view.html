@@ -1,0 +1,81 @@
+{% extends "admin/base_site.html" %}
+
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}admin/css/week-display.css" />{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../../">Home</a> &rsaquo;
+     <a href="../../../">Board</a> &rsaquo;
+     <a href="../../">Weeks</a> &rsaquo;
+     {{ week }}
+</div>
+{% endblock %}
+
+{% block content %}
+<p>
+<a href='../assign/'>Assign Someone else to this Week</a><br />
+<a href='../populate/'>(re)Populate Week (with all people and their default hours)</a>
+</p>
+
+<table>
+    <tr>
+        <th>Start Date:</th>
+        <td>{{ week.start_date }}</td>
+    </tr>
+    <tr>
+        <th>Total Available Hours (for whole week):</th>
+        <td>{{ week.getTotalAvailableHours }}</td>
+    </tr>
+    <tr>
+        <th>Hours Remaining in Week:</th>
+        <td>{{ week.getAvailableHours }}</td>
+    </tr>
+    <tr>
+        <th>Total Estimated Ticket Time:</th>
+        <td>{{ week.getTotalEstimatedTicketTimes }}</td>
+    </tr>
+    <tr>
+        <th>Total Hours Spent:</th>
+        <td>{{ week.getTotalHoursSpent }}</td>
+    </tr>
+    <tr>
+        <th>Remaining Work:</th>
+        <td>{{ week.getRemainingWorkHours }}</td>
+    </tr>
+    <tr>
+        <th>Unassigned Hours:</th>
+        <td>{{ week.getUnassignedHours }}</td>
+    </tr>
+</table>
+<br />
+
+{% load week_tags %}
+{% load comparison %}
+
+<strong>Available hours breakdown</strong><br /><br />
+{% for day, dow in days.items %}
+<table style="{% ifequal day 0 %}border-left: 1px solid #d8d8d8;{% endifequal %}" class="day_display {% if_less day current %}day_display_passed{% endif_less %}">
+    <tr>
+        <th>{{ dow }}</th>
+    </tr>
+    {% get_week_day_person_hours as person_hours %}
+    {% if person_hours %}
+    {% for person_hour in person_hours %}
+    <tr>
+        <td>
+            <a href="../assign/{{ person_hour.id }}">
+            {% if person_hour.available_hours %}<strong>{% endif %}
+            {{ person_hour.person.username }} ({{ person_hour.available_hours }})
+            {% if person_hour.available_hours %}</strong>{% endif %}
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>None</td>
+    </tr>
+    {% endif %}
+    </table>
+{% endfor %}
+{% endblock %}

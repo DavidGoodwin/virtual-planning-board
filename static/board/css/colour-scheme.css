@@ -1,0 +1,37 @@
+h1, h2, h3, q, #header div, #header div *, #footer *, .headerTitle, .sideBox div
+{ /* Text Color: */  color: #000066; }
+
+h1, q,  #header, .sideBox, .sideBox div
+{ /* Border Color: */  border-color: #000066; }
+
+#header, .loginBox, .sideBox div, .sideBox .thisPage
+{ /* Background Color: */  background-color: #d6c5e7; }
+
+q, .sideBox a, .sideBox span
+{ /* Background Color: */  background-color: #a46aff; }
+
+.sideBox a:hover
+{/*hover for menus*/ background-color: #cccccc;} 
+
+.RHS div 
+{background-color: #cccccc;} 
+/* ###### Special Colors ###### */
+
+acronym {
+  color: blue;
+  border-bottom-color: blue;
+}
+
+#bodyText a {
+  color: #000066;
+  border-bottom-color: #000066;
+}
+
+#footer {
+  /*background-color: #f2f6ff;*/
+}
+
+.error {
+    color: #dd0000;
+    font-weight: bold;
+}

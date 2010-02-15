@@ -1,0 +1,8 @@
+div.description div {
+	float: left;	
+	width: 70%;
+}
+
+.aligned label {
+	width:10em;
+}

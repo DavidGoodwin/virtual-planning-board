@@ -1,0 +1,59 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="report">
+    <h1>Client Report</h1>
+    {% include "reporting/filter.html" %}
+    
+{% ifequal ticket_count 0 %}
+    <p>No tickets found</p>
+{% else %}
+    <table>
+        <tr>
+            <th>Ticket:</th>
+            <th>Status:</th>
+        {% if show_time_spent %}
+            <th>Time Spent:</th>
+        {% endif %}
+            <th>Cost So Far:</th>
+        {% if can_edit %}
+            <th>Edit:</th>
+        {% endif %}
+        </tr>
+        
+    {% for ticket in tickets %}
+        <tr>
+            <td><a href="{{ path_to_trac }}{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }} {{ ticket.title }}</a></td>
+            <td>{{ ticket.status|capfirst }}</td>
+        {% if show_time_spent %}
+            <td>{{ ticket.actual_time }}</td>
+        {% endif %}
+            <td>{{ ticket.getCostSoFar }}</td>
+        {% if can_edit %}
+            <td><a href="{% url planner.reporting.views.client_report.do_report project_name %}{{ ticket.trac_ticket_id }}/"><img src="{{ MEDIA_URL }}board/images/pencil.png"/></a></td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+        
+        <tr>
+            <td>&nbsp;</td>
+            <th>Totals:</th>
+        {% if show_time_spent %}
+            <td>{{ total_hours }}</td>
+        {% endif %}
+            <td>{{ total_cost }}</td>
+        {% if can_edit %}
+            <td>&nbsp;</td>
+        {% endif %}
+        </tr>
+    </table>
+{% endifequal %}
+</div>
+{% endblock %}

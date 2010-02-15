@@ -1,0 +1,39 @@
+table.day_display {
+    font-size: 11px;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    border-collapse: collapse;
+    border-right: 1px solid #d8d8d8;
+    margin-bottom: 2em;
+}
+
+table.day_display tr {
+    padding: 0px;
+    margin: 0px;
+}
+
+table.day_display tr th {
+    font-size: 12px;
+    background-color: #eee;
+    margin: 0px;
+    padding: 20px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+table.day_display tr td {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 20px;
+}
+
+table.day_display tr th, table.day_display tr td {
+    margin: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+table.day_display_passed tr td {
+   background-color: #eee; 
+}

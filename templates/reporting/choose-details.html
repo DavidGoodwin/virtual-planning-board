@@ -1,0 +1,35 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+<link type="text/css" href="{{ MEDIA_URL }}reporting/css/humanity/jquery-ui-1.7.1.custom.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{{ MEDIA_URL }}reporting/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}reporting/js/jquery-ui-1.7.1.custom.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#id_start, #id_end').datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<div id="project_details">
+    <h1>Search For Time Bookings:</h1>
+{% ifnotequal error '' %}
+    <h3 class='error'>{{ error }}</h3>
+{% endifnotequal %}
+    <form action="" method="post">
+        <ul>
+            {% for field in form %}
+            <li>{{ field.errors }}{{ field.label_tag }}{{ field }}</li>
+            {% endfor %}
+            <li><input type="submit" name="submit" value="Report!" /></li>
+        </ul>
+    </form>
+</div>
+{% endblock %}

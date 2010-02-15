@@ -1,0 +1,32 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="developer_tickets_list">
+    <h1>Current Open Tickets For "{{ developer_name }}":</h1>
+    
+{% for project_name in projects %}
+    <h3>Tickets for "{{ project_name }}":</h3>
+    <table class="project_table">
+        <tr>
+            <th class="ticket">Ticket:</th>
+            <th class="summary">Summary:</th>
+        </tr>
+    {% for ticket in tickets %}
+        {% ifequal project_name ticket.project.name %}
+        <tr>
+            <td><a href="{{ path_to_trac }}{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }}</a></td>
+            <td>{{ ticket.title }}</td>
+        </tr>
+        {% endifequal %}
+    {% endfor %}
+    </table>
+{% endfor %}
+</div>
+{% endblock %}

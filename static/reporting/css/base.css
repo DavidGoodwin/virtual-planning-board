@@ -1,0 +1,40 @@
+
+body {
+  background-color: white;
+  color: black;
+  font-family: verdana, tahoma, helvetica, arial, sans-serif;
+  font-size: 95%;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  font-size: 13px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "trebuchet ms", tahoma, sans-serif;
+}
+
+#project_details, #project_list, #hours_report, #time_spent_report {
+}
+
+#menu {
+    float: left;
+    border: solid #000000 1px;
+    background-color: #cccccc;
+    padding: 16px;
+    margin: 16px;
+}
+
+.filter {
+    background-color: #eeeeee;
+    border: 1px solid black;
+    margin-left: 16px;
+    padding: 12px;
+}
+
+#hours_report table tr td.actual_time {
+    text-align: right;
+}
+
+.ui-widget {
+    font-size: 10px !important;
+}

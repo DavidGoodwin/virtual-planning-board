@@ -1,0 +1,53 @@
+{% extends "board/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}board/css/client_reporting.css" type="text/css" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}board/css/colour-scheme.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="client_report">
+    <h1>Client Report</h1>
+    <h3>Edit Ticket's Cost</h3>
+    
+{% ifnotequal error '' %}
+    <h3 class="client_reporting_error">{{ error }}</h3>
+{% endifnotequal %}
+    
+    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Ticket:</th>
+                <td><a href="http://trac.palepurple.co.uk/projects/{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }} {{ ticket.title }}</a></td>
+            </tr>
+            {{ form.as_table }}
+            <tr>
+                <th colspan="2"><input type="submit" name="submit" value="Save" /></th>
+            </tr>
+        </table>
+    </form>
+    
+<!--    <form action="" method="post">
+        <table>
+            <tr>
+                <th>Ticket:</th>
+                <td><a href="http://trac.palepurple.co.uk/projects/{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }} {{ ticket.title }}</a></td>
+            </tr>
+            <tr>
+                <th>Cost Per Hour:</th>
+                <td><input type="text" name="per_hour" value="{{ ticket.cost.per_hour }}" /></td>
+            </tr>
+            <tr>
+                <th>Override Total:</th>
+                <td><input type="text" name="override_total" value="{{ ticket.cost.override_total }}" /></td>
+            </tr>
+            <tr>
+                <th colspan="2"><input type="submit" name="submit" value="Save" /></th>
+            </tr>
+        </table>
+    </form>-->
+</div>
+{% endblock %}

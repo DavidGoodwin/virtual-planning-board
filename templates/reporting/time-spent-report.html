@@ -1,0 +1,33 @@
+{% extends "reporting/base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}reporting/css/base.css" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
+
+{% block content %}
+<div id="time_spent_report">
+    <h1>Time Spent For: "{{ project_name }}"</h1>
+    
+    <table>
+        <tr>
+            <th>ID:</th>
+            <th>Ticket Name:</th>
+            <th>Time Spent:</th>
+            <th>Estimated:</th>
+            <th>Difference:</th>
+        </tr>
+    {% for ticket in tickets %}
+        <tr>
+            <td class="id"><a href="{{ path_to_trac }}{{ project_name }}/ticket/{{ ticket.trac_ticket_id }}">#{{ ticket.trac_ticket_id }}</a></td>
+            <td class="summary">{{ ticket.title }}</td>
+            <td class="time_spent">{{ ticket.actual_time }}</td>
+            <td class="estimated">{{ ticket.estimated_time }}</td>
+            <td class="difference">{{ ticket.getTimeDifference }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

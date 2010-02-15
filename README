@@ -1,0 +1,51 @@
+Welcome to Pale Purple's Virtual Planning Board
+===============================================
+
+What?
+=====
+
+The Virtual planning board is a web application that allows you to tie in visual project planning with your existing Trac tickets - across a range of projects (where each project has a separate subversion repository and associated trac instance). It allows you to assign tickets to a particular week and therefore plan your workflow for a given period.
+
+The virtual planner also provides a few reporting facilities - for instance, to compare estimated vs actual time spent for a given date range.
+
+Why?
+====
+
+At Pale Purple we've always tried to follow some form of agile development process. We like to keep our documentation and planning processes light but full. By that I mean that we want to have all the information at our fingertips, but we don't want to spend a lot of time rewriting plans, rearranging gantt charts or doing other things that we hate.
+
+We used to solve our problems by having a simply cork board, split up into weeks. On those weeks we would pin cards with a simple title, project name, time estimate and reference to a trac ticket. Developers would then pin their name onto the card when they were working on something. Calculations about estimated vs available time would be done manually (which was annoying but there was no better way!). We'd move the board around each week and therefore see when work had not been completed. This was good as a rough guide to how well we'd estimated things that week, or how much non-planned work had slipped through.
+
+Also, we don't always work in one place, so while a planning board in the office is nice, it can be difficult when someone is at home and needs to see what the next priority ticket is.
+
+We wanted a better way that didn't involve rewriting stuff onto cards or other things that developers without a project manager (said project manager soon to be unavailable due to maternity leave!) would just not do! We'd got everyone into the habit of using trac and svn properly and wanted to make use of that.
+
+So - we wrote a planning board, where tickets can be dragged around into an appropriate week and ordered by priority (towards the top left is highest priority).
+
+Screenshots
+===========
+
+There are some screenshots embedded within the User Guide:
+
+http://virtual-planner.palepurple.co.uk/wiki/UserGuide
+
+License
+=======
+
+Code written by Pale Purple is licensed under the GPL.
+
+The Science bit
+===============
+
+Because of all of the different components etc involved, setup is currently not a simple task. Please refer to:
+
+http://virtual-planner.palepurple.co.uk/wiki/django-installation
+
+Notes
+=====
+
+The design is currently optimised for a 19" monitor as that's what we all use in the office. We're working on making it more flexible and will have sorted something before release. 
+
+Feedback
+========
+
+If you have any suggestions, ideas or need to contact us for help, you can reach us at support at palepurple.co.uk.
