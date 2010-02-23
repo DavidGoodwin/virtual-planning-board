@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.utils import simplejson
-from planner.board.models import *
+from board.models import *
 from math import ceil
 
 def get_ticket_info(request, ticket_id):

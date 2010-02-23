@@ -1,5 +1,5 @@
 from django.views.generic.simple import direct_to_template
-from planner.board.plugins import PlanningBoard
+from board.plugins import PlanningBoard
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -38,5 +38,5 @@ def weeks(request, weeks):
     return direct_to_template(request, 'board/index.html', data)
 
 def redirect_to_board(request):
-    index = reverse('planner.board.views.index.index')
+    index = reverse('board.views.index.index')
     return HttpResponseRedirect(index)    

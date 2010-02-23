@@ -1,7 +1,7 @@
 import sys, datetime, time
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from planner.board.models import Ticket, TicketChange, Project, ProjectAlias, Person
+from board.models import Ticket, TicketChange, Project, ProjectAlias, Person
 
 class Logger:
     filename = '/tmp/board_ping.debug'

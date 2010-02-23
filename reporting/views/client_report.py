@@ -2,9 +2,9 @@ from django.views.generic.simple import direct_to_template
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from planner.board.models import *
-from planner.board.managers import PersonManager
-from planner.reporting.forms import CostForm
+from board.models import *
+from board.managers import PersonManager
+from reporting.forms import CostForm
 
 def index(request):
     """

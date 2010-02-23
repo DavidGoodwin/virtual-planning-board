@@ -1,4 +1,4 @@
-from planner.board.models import Project, Person, Ticket, Week
+from board.models import Project, Person, Ticket, Week
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import date, timedelta
 from calendar import monthrange

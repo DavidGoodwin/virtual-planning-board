@@ -69,7 +69,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-    'planner.board.context_processors.admin_url',
+    'board.context_processors.admin_url',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,7 +78,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'planner.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     os.path.join(dirname, 'templates')
@@ -90,7 +90,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.sites',
-    'planner.board',
-    'planner.reporting',
-    'planner.client',
+    'board',
+    'reporting',
+    'client',
 )

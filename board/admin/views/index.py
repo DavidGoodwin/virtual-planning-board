@@ -1,8 +1,8 @@
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404
-from planner.board.models import Week, WeekDayPersonHours, Person
+from board.models import Week, WeekDayPersonHours, Person
 from datetime import datetime
-from planner.board.forms import WeekDayPersonHoursAssignForm
+from board.forms import WeekDayPersonHoursAssignForm
 from django.http import HttpResponseRedirect
 from django.contrib.admin.views.decorators import staff_member_required
 

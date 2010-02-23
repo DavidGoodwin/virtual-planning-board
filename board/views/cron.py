@@ -1,6 +1,6 @@
 import datetime
 from django.http import HttpResponse
-from planner.board.models import Week, Person, WeekDayPersonHours
+from board.models import Week, Person, WeekDayPersonHours
 
 def index(request):
     """

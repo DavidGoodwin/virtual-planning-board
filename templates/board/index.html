@@ -10,7 +10,7 @@
 <script src="{{ MEDIA_URL }}board/javascript/pp_dropmenu.js" type="text/javascript"></script>
 <script type="text/javascript">
     var MEDIA_URL = "{{ MEDIA_URL }}"
-    var BASE_URL = "{% url planner.board.views.index.index %}"
+    var BASE_URL = "{% url board.views.index.index %}"
 </script>
 {% endblock %}
 
@@ -25,22 +25,22 @@
 {% endfor %}
 </div>
   <div id="top-menu">
-    <a id="home-link" href="{% url planner.board.views.index.index %}">Home</a>
+    <a id="home-link" href="{% url board.views.index.index %}">Home</a>
     <ul class="pp_dropmenu">
     <li>Weeks</li>
         <ul>
-            <li><a href="{% url planner.board.views.index.weeks 0 %}">Current Month Only</a></li>
-            <li><a href="{% url planner.board.views.index.weeks 2 %}">2 Weeks</a></li>
-            <li><a href="{% url planner.board.views.index.weeks 4 %}">4 Weeks</a></li>
-            <li><a href="{% url planner.board.views.index.weeks 6 %}">6 Weeks</a></li>
+            <li><a href="{% url board.views.index.weeks 0 %}">Current Month Only</a></li>
+            <li><a href="{% url board.views.index.weeks 2 %}">2 Weeks</a></li>
+            <li><a href="{% url board.views.index.weeks 4 %}">4 Weeks</a></li>
+            <li><a href="{% url board.views.index.weeks 6 %}">6 Weeks</a></li>
         </ul>
     </ul>
     <ul class="pp_dropmenu">
     <li>Person</li>
         <ul>
-            <li><a href="{% url planner.board.views.index.person 0 %}">All</a></li>
+            <li><a href="{% url board.views.index.person 0 %}">All</a></li>
             {% for person in people %}
-                <li><a href="{% url planner.board.views.index.person person.id %}">{{ person.username }}</a></li>
+                <li><a href="{% url board.views.index.person person.id %}">{{ person.username }}</a></li>
             {% endfor %}
         </ul>
     </ul>

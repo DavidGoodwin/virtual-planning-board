@@ -1,10 +1,10 @@
-from planner.board.models import Person, Project, Ticket, Week
+from board.models import Person, Project, Ticket, Week
 from django.contrib import admin
-from planner.board.widgets import ReadOnlyAdminFields
+from board.widgets import ReadOnlyAdminFields
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext, ugettext_lazy as _
-from planner.board.forms import PersonChangeForm, PersonCreationForm
+from board.forms import PersonChangeForm, PersonCreationForm
 
 class ProjectAdmin(admin.ModelAdmin):
     fields = ('name', 'colour')

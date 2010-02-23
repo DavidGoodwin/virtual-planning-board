@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from planner.board.managers import PersonManager, ProjectManager, TicketManager, TicketChangeManager
+from board.managers import PersonManager, ProjectManager, TicketManager, TicketChangeManager
 
 class Cost(models.Model):
     per_hour = models.FloatField(default = 0)

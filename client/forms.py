@@ -1,4 +1,4 @@
-from planner.board.models import Cost
+from board.models import Cost
 from django.forms import ModelForm
 
 class CostForm(ModelForm):

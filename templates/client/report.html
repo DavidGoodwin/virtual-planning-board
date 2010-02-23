@@ -37,7 +37,7 @@
         {% endif %}
             <td>{{ ticket.getCostSoFar }}</td>
         {% if can_edit %}
-            <td><a href="{% url planner.reporting.views.client_report.do_report project_name %}{{ ticket.trac_ticket_id }}/"><img src="{{ MEDIA_URL }}board/images/pencil.png"/></a></td>
+            <td><a href="{% url reporting.views.client_report.do_report project_name %}{{ ticket.trac_ticket_id }}/"><img src="{{ MEDIA_URL }}board/images/pencil.png"/></a></td>
         {% endif %}
         </tr>
     {% endfor %}

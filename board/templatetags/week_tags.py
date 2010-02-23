@@ -1,4 +1,4 @@
-from planner.board.models import WeekDayPersonHours
+from board.models import WeekDayPersonHours
 from django.template import Library, Node, TemplateSyntaxError
 
 register = Library()

@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('planner.board.views',
+urlpatterns = patterns('board.views',
     (r'^$', 'index.index'),
     (r'^person/(?P<person_id>\d+)/', 'index.person'),
     (r'^weeks/(?P<weeks>\d+)/', 'index.weeks'),

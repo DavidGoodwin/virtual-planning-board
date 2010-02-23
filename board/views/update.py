@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from planner.board.models import *
+from board.models import *
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import connection

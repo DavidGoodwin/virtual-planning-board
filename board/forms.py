@@ -1,4 +1,4 @@
-from planner.board.models import Person, WeekDayPersonHours
+from board.models import Person, WeekDayPersonHours
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
 

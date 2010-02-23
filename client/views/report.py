@@ -3,9 +3,9 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from planner.board.models import *
-from planner.board.managers import PersonManager
-from planner.client.forms import CostForm
+from board.models import *
+from board.managers import PersonManager
+from client.forms import CostForm
 
 def index(request):
     """
@@ -16,9 +16,9 @@ def index(request):
     # option of viewing other projects. Only admins should see all projects. Denied to the rest.
     person = Person.objects.authenticate(request)
     if person == None:
-        return HttpResponseRedirect(reverse('planner.board.views.index.index')) # Should never happen.
+        return HttpResponseRedirect(reverse('board.views.index.index')) # Should never happen.
     if not person.is_staff:
-        url = reverse('planner.client.views.report.index', None, [person.username])
+        url = reverse('client.views.report.index', None, [person.username])
         return HttpResponseRedirect(url);
 #        return HttpResponseRedirect('/client/report/' + person.username + '/')
     
@@ -34,9 +34,9 @@ def do_report(request, project_name):
     # Check that the project name matches their user name, since we don't want to allow them to view other projects.
     person = Person.objects.authenticate(request)
     if person == None:
-        return HttpResponseRedirect(reverse('planner.board.views.index.index')) # Should never happen.
+        return HttpResponseRedirect(reverse('board.views.index.index')) # Should never happen.
     if not person.is_staff and project_name != person.username:
-        return HttpResponseRedirect(reverse('planner.client.views.report.index'))
+        return HttpResponseRedirect(reverse('client.views.report.index'))
     
     can_edit = False
     if person.is_staff:
@@ -78,15 +78,15 @@ def edit_ticket(request, project_name, trac_ticket_id):
     
     person = Person.objects.authenticate(request)
     if person == None:
-        return HttpResponseRedirect(reverse('planner.board.views.index.index')) # Should never happen.
+        return HttpResponseRedirect(reverse('board.views.index.index')) # Should never happen.
     if not person.is_staff:
-        url = reverse('planner.client.views.report.index', None, [person.username])
+        url = reverse('client.views.report.index', None, [person.username])
         return HttpResponseRedirect(url);
     
     try:
         ticket = Ticket.objects.get(project__name = project_name, trac_ticket_id = trac_ticket_id)
     except ObjectDoesNotExist:
-        url = reverse('planner.client.views.report.index', None, [project_name])
+        url = reverse('client.views.report.index', None, [project_name])
         return HttpResponseRedirect(url);
 #        return HttpResponseRedirect('/client/report/' + project_name + '/')
     
@@ -108,7 +108,7 @@ def edit_ticket(request, project_name, trac_ticket_id):
                 ticket.cost = cost
             
             ticket.save()
-            url = reverse('planner.client.views.report.index', None, [project_name])
+            url = reverse('client.views.report.index', None, [project_name])
             return HttpResponseRedirect(url);
 #            return HttpResponseRedirect('/client/report/' + project_name + '/')
     else:

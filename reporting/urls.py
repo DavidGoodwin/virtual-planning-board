@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('planner.reporting.views',
+urlpatterns = patterns('reporting.views',
     (r'^$', 'index.index'),
     (r'^hours/$', 'hours.index'),
     (r'^hours/(?P<project_name>[a-zA-Z0-9\ \-_]*)/$', 'hours.choose_details'),

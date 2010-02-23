@@ -1,8 +1,8 @@
 from django.views.generic.simple import direct_to_template
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-from planner.board.models import *
-from planner.reporting.forms import list_to_choices, SearchTimeBookingForm
+from board.models import *
+from reporting.forms import list_to_choices, SearchTimeBookingForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -76,7 +76,7 @@ def do_report(request, project_name):
         start_date = request.POST['start']
         end_date = request.POST['end']
     except KeyError, message:
-        url = reverse('planner.reporting.views.hours.choose_details', kwargs={'project_name': project_name})
+        url = reverse('reporting.views.hours.choose_details', kwargs={'project_name': project_name})
         return HttpResponseRedirect(url)
     
     # Find all changes which meet the criteria.
