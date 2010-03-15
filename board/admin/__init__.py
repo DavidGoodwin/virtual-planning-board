@@ -13,9 +13,9 @@ class ProjectAdmin(admin.ModelAdmin):
     list_per_page = 25
     search_fields = ('id', 'name', 'colour')
 
-class TicketAdmin(ReadOnlyAdminFields, admin.ModelAdmin):
+class TicketAdmin(admin.ModelAdmin):
     fields = ('title', 'trac_ticket_id', 'project', 'description', 'estimated_time', 'assigned_person', 'week')
-    fields_read_only = ('title', 'trac_ticket_id', 'project', 'description', 'estimated_time', 'assigned_person') 
+    #fields_read_only = ('title', 'trac_ticket_id', 'project', 'description', 'estimated_time', 'assigned_person') 
     list_display = ('project', 'trac_ticket_id', 'title', 'estimated_time', 'assigned_person', 'week')
     list_filter = ('project',)
     ordering = ('-week__start_date', )
