@@ -4,7 +4,7 @@ from board.widgets import ReadOnlyAdminFields
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext, ugettext_lazy as _
-from board.forms import PersonChangeForm, PersonCreationForm
+from board.forms import PersonChangeForm, PersonCreationForm, ProjectForm
 
 class ProjectAdmin(admin.ModelAdmin):
     fields = ('name', 'colour')
@@ -12,6 +12,8 @@ class ProjectAdmin(admin.ModelAdmin):
     ordering = ('name',)
     list_per_page = 25
     search_fields = ('id', 'name', 'colour')
+
+    form = ProjectForm
 
 class TicketAdmin(admin.ModelAdmin):
     fields = ('title', 'trac_ticket_id', 'project', 'description', 'estimated_time', 'assigned_person', 'week')
