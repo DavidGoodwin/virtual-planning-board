@@ -11,6 +11,9 @@ class Person(User):
     default_hours_per_day = models.FloatField(default=0)
     objects = PersonManager()
 
+    class Meta:
+        verbose_name_plural = "people"
+
 class Project(models.Model):
     name = models.CharField(max_length=500)
     colour = models.CharField(max_length=6)
