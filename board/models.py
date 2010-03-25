@@ -116,7 +116,7 @@ class Ticket(models.Model):
     assigned_person = models.ForeignKey(Person)
     week = models.ForeignKey(Week, null=True)
     status = models.CharField(max_length=50)
-    priority = models.IntegerField()
+    priority = models.IntegerField(default=0)
     creation_date = models.DateTimeField(auto_now_add=True, null=True)
     accepted = models.BooleanField()
     estimated_time = models.FloatField(default=0)
