@@ -828,6 +828,7 @@ PP_Board.prototype.getUnassignedTickets = function(page){
 
     if(project == "") project = 0;
     if(trac_id == "") trac_id = 0;
+    if(title == "") title = " "
 
     this.getting_tickets = true;
     

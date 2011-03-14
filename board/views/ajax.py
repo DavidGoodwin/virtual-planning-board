@@ -48,7 +48,7 @@ def get_unassigned_tickets(request, project_id, title, trac_id, page, limit):
     
     if project_id != 0:
         query = query.filter(project__id = project_id)
-    if title != '':
+    if title != ' ':
         query = query.filter(title__contains = title)
     if trac_id != 0:
         query = query.filter(trac_ticket_id = trac_id)
